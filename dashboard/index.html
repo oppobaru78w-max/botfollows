@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SMM Bot Engine - Kelola akun bot untuk TikTok, Instagram, Facebook, YouTube">
+  <title>SMM Bot Engine — Kelola Akun</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- ==================== SIDEBAR ==================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+      </div>
+      <span class="sidebar-brand-text">SMM Bot Engine</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Menu Utama</div>
+        <button class="sidebar-link active" onclick="gantiTab('monitoring')" id="nav-monitoring">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          Monitoring
+        </button>
+        <button class="sidebar-link" onclick="gantiTab('akun')" id="nav-akun">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Akun Bot
+          <span class="count" id="nav-count-akun">0</span>
+        </button>
+        <button class="sidebar-link" onclick="gantiTab('engine')" id="nav-engine">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          Bot Engine
+          <span class="count" id="nav-count-engine">0</span>
+        </button>
+        <button class="sidebar-link" onclick="gantiTab('proxy')" id="nav-proxy">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Proxy Pool
+          <span class="count" id="nav-count-proxy">0</span>
+        </button>
+        <button class="sidebar-link" onclick="gantiTab('log')" id="nav-log">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Log Aktivitas
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Platform</div>
+        <button class="sidebar-link" onclick="filterPlatformSidebar('tiktok')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/><path d="M15 8a4 4 0 1 0 0-8"/><line x1="15" y1="0" x2="15" y2="20"/></svg>
+          TikTok
+          <span class="count" id="nav-count-tiktok">0</span>
+        </button>
+        <button class="sidebar-link" onclick="filterPlatformSidebar('instagram')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Instagram
+          <span class="count" id="nav-count-instagram">0</span>
+        </button>
+        <button class="sidebar-link" onclick="filterPlatformSidebar('facebook')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook
+          <span class="count" id="nav-count-facebook">0</span>
+        </button>
+        <button class="sidebar-link" onclick="filterPlatformSidebar('youtube')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.13C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+          YouTube
+          <span class="count" id="nav-count-youtube">0</span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">v1.0.0</div>
+  </aside>
+
+  <!-- ==================== SIDEBAR OVERLAY (mobile) ==================== -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="main-content">
+
+    <!-- Top bar -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <button class="mobile-menu-btn" onclick="toggleSidebar()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        </button>
+        <h1 id="page-title">Monitoring & Analitik</h1>
+      </div>
+      <div class="top-bar-right" style="display:none;">
+        <button class="btn btn-secondary" onclick="bukaModalImport()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Import
+        </button>
+        <button class="btn btn-primary" onclick="bukaModalTambah()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Tambah Akun
+        </button>
+      </div>
+    </header>
+
+    <!-- ==================== PAGE: MONITORING & ANALITIK ==================== -->
+    <div class="tab-content active" id="tab-monitoring">
+      <div class="page-content">
+
+        <!-- System Live Status Banner -->
+        <div class="system-banner">
+          <div class="system-banner-info">
+            <div>
+              <span style="font-size:12px; color:var(--text-muted); display:block;">Status Bot Engine</span>
+              <span class="badge" id="mon-runner-badge" style="background:var(--neutral-light); color:var(--neutral); margin-top:2px;">
+                <span class="badge-dot"></span> <span id="mon-runner-text">Runner: Idle</span>
+              </span>
+            </div>
+            <div style="width:1px; height:28px; background:var(--border);"></div>
+            <div>
+              <span style="font-size:12px; color:var(--text-muted); display:block;">Browser Aktif</span>
+              <strong id="mon-browser-count" style="font-size:14px;">0 instance</strong>
+            </div>
+            <div style="width:1px; height:28px; background:var(--border);"></div>
+            <div>
+              <span style="font-size:12px; color:var(--text-muted); display:block;">Proxy Siap Pakai</span>
+              <strong id="mon-proxy-pool" style="font-size:14px;">0 proxy</strong>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-secondary btn-sm" onclick="gantiTab('engine')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              Kelola Task
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="muatAnalitik()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              Refresh
+            </button>
+          </div>
+        </div>
+
+        <!-- Top KPI Cards -->
+        <div class="stats-row" style="margin-bottom:20px;">
+          <div class="stat-card">
+            <div class="stat-icon total">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="mon-stat-akun">0</h3>
+              <p>Total Akun Bot</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon aktif">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="mon-stat-selesai">0</h3>
+              <p>Aksi Sukses</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="mon-stat-rate">100%</h3>
+              <p>Tingkat Sukses (Rate)</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon nonaktif">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="mon-stat-proxy">0</h3>
+              <p>Proxy Aktif (Pool)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analytics Grid -->
+        <div class="analytics-grid">
+          <!-- Panel 1: Distribusi Aksi Bot -->
+          <div class="table-panel">
+            <div class="table-header">
+              <span class="table-header-title">Distribusi Aksi Bot</span>
+              <span class="table-header-count">Follow, Like, Comment, View, Share</span>
+            </div>
+            <div style="padding: 16px 20px;" id="container-aksi-chart">
+              <!-- Bar items rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Panel 2: Performa Platform -->
+          <div class="table-panel">
+            <div class="table-header">
+              <span class="table-header-title">Performa per Platform</span>
+              <span class="table-header-count">Akun & Aksi Terdistribusi</span>
+            </div>
+            <div id="container-platform-perf">
+              <!-- Platform items rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Live Feed Aktivitas Terkini -->
+        <div class="table-panel">
+          <div class="table-header">
+            <span class="table-header-title">Aktivitas & Log Terkini</span>
+            <button class="btn btn-ghost btn-sm" onclick="gantiTab('log')">Lihat Semua Log →</button>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Waktu</th>
+                  <th>Platform</th>
+                  <th>Akun</th>
+                  <th>Aksi</th>
+                  <th>Detail</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tabel-mon-log"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== PAGE: AKUN BOT ==================== -->
+    <div class="tab-content" id="tab-akun">
+      <div class="page-content">
+
+        <!-- Stats -->
+        <div class="stats-row" id="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon total">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="stat-total">0</h3>
+              <p>Total Akun</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon aktif">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="stat-aktif">0</h3>
+              <p>Aktif</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon nonaktif">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="stat-nonaktif">0</h3>
+              <p>Nonaktif</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="stat-banned">0</h3>
+              <p>Banned</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+          <div class="toolbar-left">
+            <div class="search-box">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="input-cari" placeholder="Cari username atau email..." oninput="cariAkun()">
+            </div>
+            <select class="select-field" id="filter-platform" onchange="filterData()">
+              <option value="">Semua Platform</option>
+              <option value="tiktok">TikTok</option>
+              <option value="instagram">Instagram</option>
+              <option value="facebook">Facebook</option>
+              <option value="youtube">YouTube</option>
+            </select>
+            <select class="select-field" id="filter-status" onchange="filterData()">
+              <option value="">Semua Status</option>
+              <option value="aktif">Aktif</option>
+              <option value="nonaktif">Nonaktif</option>
+              <option value="banned">Banned</option>
+              <option value="verifikasi">Verifikasi</option>
+            </select>
+            <select class="select-field" id="filter-session" onchange="filterData()">
+              <option value="">Semua Sesi</option>
+              <option value="logged_in">Sesi Aktif</option>
+              <option value="belum_login">Belum Login</option>
+              <option value="expired">Expired</option>
+              <option value="challenge">Challenge / 2FA</option>
+            </select>
+          </div>
+          <div class="toolbar-right">
+            <button class="btn btn-secondary btn-sm" id="btn-cek-semua-sesi" onclick="verifikasiSemuaSesiUI()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Cek Semua Sesi
+            </button>
+            <button class="btn btn-danger btn-sm" id="btn-hapus-terpilih" style="display:none;" onclick="hapusTerpilih()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              Hapus (<span id="jumlah-terpilih">0</span>)
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="muatData()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              Refresh
+            </button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-panel">
+          <div class="table-header">
+            <span class="table-header-title">Daftar Akun <span class="table-header-count" id="table-count"></span></span>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:40px;"><input type="checkbox" class="checkbox-field" id="pilih-semua" onchange="pilihSemua()"></th>
+                  <th>Platform</th>
+                  <th>Username</th>
+                  <th>Proxy</th>
+                  <th>Status Akun</th>
+                  <th>Status Sesi / Login</th>
+                  <th>Terakhir Login</th>
+                  <th style="width:130px; text-align:right;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="tabel-akun"></tbody>
+            </table>
+          </div>
+
+          <!-- Empty state -->
+          <div class="empty-state" id="empty-state" style="display:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+            <h3>Belum Ada Akun Bot</h3>
+            <p>Tambahkan akun bot untuk mulai menggunakan engine</p>
+            <button class="btn btn-primary" onclick="bukaModalTambah()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Tambah Akun
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PAGE: BOT ENGINE ==================== -->
+    <div class="tab-content" id="tab-engine">
+      <div class="page-content">
+
+        <!-- Task Stats -->
+        <div class="stats-row" id="task-stats">
+          <div class="stat-card">
+            <div class="stat-icon total">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="task-total">0</h3>
+              <p>Total Task</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon aktif">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="task-antrian">0</h3>
+              <p>Antrian</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon nonaktif">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="task-selesai">0</h3>
+              <p>Selesai</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="task-gagal">0</h3>
+              <p>Gagal</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Task Creation Form -->
+        <div class="table-panel" style="margin-bottom: 16px;">
+          <div class="table-header">
+            <span class="table-header-title">Buat Task Baru</span>
+          </div>
+          <div style="padding: 16px;">
+            <div class="form-row" style="margin-bottom: 12px;">
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">Pilih Akun <span class="required">*</span></label>
+                <select class="form-control select-field" id="task-akun">
+                  <option value="">— Pilih akun bot —</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">Aksi <span class="required">*</span></label>
+                <select class="form-control select-field" id="task-aksi" onchange="toggleTaskFields()">
+                  <option value="follow">Follow / Subscribe</option>
+                  <option value="like">Like</option>
+                  <option value="comment">Comment</option>
+                  <option value="view">View / Tonton</option>
+                  <option value="share">Share</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label class="form-label">Target URL(s) <span class="required">*</span></label>
+              <textarea class="form-control" id="task-target" rows="3" placeholder="Masukkan URL target (satu per baris untuk multi-target)&#10;Contoh: https://tiktok.com/@username"></textarea>
+            </div>
+
+            <div class="form-row" style="margin-bottom: 12px;">
+              <div class="form-group" id="field-komentar" style="margin-bottom:0; display:none;">
+                <label class="form-label">Teks Komentar</label>
+                <input type="text" class="form-control" id="task-komentar" placeholder="Tulis komentar...">
+              </div>
+              <div class="form-group" id="field-durasi" style="margin-bottom:0; display:none;">
+                <label class="form-label">Durasi View (detik)</label>
+                <input type="number" class="form-control" id="task-durasi" value="10" min="5" max="300">
+              </div>
+            </div>
+
+            <div style="display:flex; gap:8px; justify-content: flex-end;">
+              <button class="btn btn-primary" onclick="buatTask()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Tambah ke Antrian
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Task Queue Table -->
+        <div class="toolbar">
+          <div class="toolbar-left" style="display:flex; align-items:center; gap:8px;">
+            <select class="select-field" id="filter-task-status" onchange="muatTasks()">
+              <option value="">Semua Status</option>
+              <option value="antrian">Antrian</option>
+              <option value="berjalan">Berjalan</option>
+              <option value="selesai">Selesai</option>
+              <option value="gagal">Gagal</option>
+              <option value="dibatalkan">Dibatalkan</option>
+            </select>
+            <span class="badge" id="runner-status-badge" style="background:var(--neutral-light); color:var(--neutral);">
+              <span class="badge-dot"></span> <span id="runner-status-text">Runner: Idle</span>
+            </span>
+          </div>
+          <div class="toolbar-right">
+            <button class="btn btn-primary btn-sm" id="btn-toggle-runner" onclick="toggleRunner()">
+              <svg id="runner-btn-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span id="runner-btn-text">Mulai Antrian</span>
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="bersihkanTask()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              Bersihkan Selesai
+            </button>
+            <button class="btn btn-danger btn-sm" onclick="batalkanSemuaTask()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+              Batalkan Semua
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="muatTasks()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              Refresh
+            </button>
+          </div>
+        </div>
+
+        <div class="table-panel">
+          <div class="table-header">
+            <span class="table-header-title">Antrian Task <span class="table-header-count" id="task-table-count"></span></span>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Akun</th>
+                  <th>Platform</th>
+                  <th>Aksi</th>
+                  <th>Target</th>
+                  <th>Status</th>
+                  <th>Hasil</th>
+                  <th>Dibuat</th>
+                  <th style="width:80px;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="tabel-task"></tbody>
+            </table>
+          </div>
+          <div class="empty-state" id="empty-task" style="display:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            <h3>Belum Ada Task</h3>
+            <p>Buat task baru untuk memulai otomatisasi</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== PAGE: LOG AKTIVITAS ==================== -->
+    <div class="tab-content" id="tab-log">
+      <div class="page-content">
+        <div class="table-panel">
+          <div class="table-header">
+            <span class="table-header-title">Log Aktivitas</span>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Waktu</th>
+                  <th>Aksi</th>
+                  <th>Username</th>
+                  <th>Detail</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tabel-log"></tbody>
+            </table>
+          </div>
+          <div class="empty-state" id="empty-log" style="display:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <h3>Belum Ada Aktivitas</h3>
+            <p>Log akan muncul setelah ada aksi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PAGE: PROXY POOL ==================== -->
+    <div class="tab-content" id="tab-proxy">
+      <div class="page-content">
+        <!-- Proxy Stats -->
+        <div class="stats-row" id="proxy-stats">
+          <div class="stat-card">
+            <div class="stat-icon total">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="proxy-stat-total">0</h3>
+              <p>Total Proxy</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon aktif">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="proxy-stat-aktif">0</h3>
+              <p>Proxy Aktif</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="proxy-stat-mati">0</h3>
+              <p>Proxy Mati</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon nonaktif">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="stat-info">
+              <h3 id="proxy-stat-kecepatan">0 ms</h3>
+              <p>Rata-rata Latency</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+          <div class="toolbar-left" style="display:flex; align-items:center; gap:8px;">
+            <div class="search-box">
+              <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" class="form-control" id="input-cari-proxy" placeholder="Cari host atau catatan..." oninput="cariProxy()">
+            </div>
+            <select class="select-field" id="filter-proxy-status" onchange="muatProxy()">
+              <option value="">Semua Status</option>
+              <option value="aktif">Aktif</option>
+              <option value="lambat">Lambat</option>
+              <option value="mati">Mati / Timeout</option>
+            </select>
+          </div>
+          <div class="toolbar-right">
+            <button class="btn btn-primary btn-sm" onclick="bukaModalTambahProxy()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Tambah Proxy
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="bukaModalImportProxy()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Import Bulk
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btn-test-semua-proxy" onclick="testSemuaProxyUI()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              Tes Semua
+            </button>
+            <button class="btn btn-danger btn-sm" onclick="bersihkanProxyMati()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              Hapus Proxy Mati
+            </button>
+          </div>
+        </div>
+
+        <!-- Table Panel -->
+        <div class="table-panel">
+          <div class="table-header">
+            <span class="table-header-title">Daftar Proxy Pool <span class="table-header-count" id="proxy-table-count"></span></span>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Server (Host:Port)</th>
+                  <th>Protokol</th>
+                  <th>Autentikasi</th>
+                  <th>Status</th>
+                  <th>Latency / Ping</th>
+                  <th>IP Terdeteksi</th>
+                  <th>Terakhir Dicek</th>
+                  <th>Catatan</th>
+                  <th style="width:90px;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="tabel-proxy"></tbody>
+            </table>
+          </div>
+          <div class="empty-state" id="empty-proxy" style="display:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <h3>Belum Ada Proxy di Pool</h3>
+            <p>Tambahkan proxy untuk rotasi IP otomatis dan proteksi anti-ban</p>
+            <button class="btn btn-primary" onclick="bukaModalTambahProxy()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Tambah Proxy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ==================== MODAL: TAMBAH/EDIT AKUN ==================== -->
+<div class="modal-overlay" id="modal-akun">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modal-akun-judul">Tambah Akun Baru</h2>
+      <button class="modal-close" onclick="tutupModal('modal-akun')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="form-id">
+
+      <div class="form-group">
+        <label class="form-label">Platform <span class="required">*</span></label>
+        <div class="platform-selector" id="platform-selector">
+          <div class="platform-option" data-platform="tiktok" onclick="pilihPlatform('tiktok')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/><path d="M15 8a4 4 0 1 0 0-8"/><line x1="15" y1="0" x2="15" y2="20"/></svg>
+            <span class="name">TikTok</span>
+          </div>
+          <div class="platform-option" data-platform="instagram" onclick="pilihPlatform('instagram')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <span class="name">Instagram</span>
+          </div>
+          <div class="platform-option" data-platform="facebook" onclick="pilihPlatform('facebook')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            <span class="name">Facebook</span>
+          </div>
+          <div class="platform-option" data-platform="youtube" onclick="pilihPlatform('youtube')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.13C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+            <span class="name">YouTube</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Username <span class="required">*</span></label>
+          <input type="text" class="form-control" id="form-username" placeholder="Masukkan username">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password <span class="required">*</span></label>
+          <input type="password" class="form-control" id="form-password" placeholder="Masukkan password">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" id="form-email" placeholder="email@contoh.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">No. Telepon</label>
+          <input type="text" class="form-control" id="form-phone" placeholder="08xxxxxxxxxx">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+          <label class="form-label" style="margin-bottom:0;">Proxy</label>
+          <span style="font-size:11px; color:var(--accent); cursor:pointer; font-weight:500;" onclick="pilihProxyDariPool()">+ Pilih dari Proxy Pool</span>
+        </div>
+        <input type="text" class="form-control" id="form-proxy" placeholder="ip:port atau user:pass@ip:port">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Catatan</label>
+        <textarea class="form-control" id="form-catatan" placeholder="Catatan tambahan (opsional)"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="tutupModal('modal-akun')">Batal</button>
+      <button class="btn btn-primary" id="btn-simpan" onclick="simpanAkun()">Simpan</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MODAL: IMPORT AKUN ==================== -->
+<div class="modal-overlay" id="modal-import">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Import Akun Massal</h2>
+      <button class="modal-close" onclick="tutupModal('modal-import')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="import-area" onclick="document.getElementById('file-import').click()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
+        <h4>Klik untuk pilih file atau paste di bawah</h4>
+        <p>Format: TXT atau JSON</p>
+        <input type="file" id="file-import" accept=".txt,.json" style="display:none;" onchange="prosesFileImport(this)">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Platform untuk Import</label>
+        <select class="form-control select-field" id="import-platform">
+          <option value="tiktok">TikTok</option>
+          <option value="instagram">Instagram</option>
+          <option value="facebook">Facebook</option>
+          <option value="youtube">YouTube</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Paste data akun (satu per baris)</label>
+        <textarea class="form-control" id="import-text" rows="6" placeholder="username:password&#10;username:password:email&#10;username:password:email:phone:proxy"></textarea>
+      </div>
+
+      <div class="import-format">
+        <p>Format yang diterima:</p>
+        <pre>username:password
+username:password:email
+username:password:email:phone
+username:password:email:phone:proxy</pre>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="tutupModal('modal-import')">Batal</button>
+      <button class="btn btn-primary" onclick="importAkun()">Import Sekarang</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MODAL: KONFIRMASI HAPUS ==================== -->
+<div class="modal-overlay" id="modal-hapus">
+  <div class="modal" style="max-width: 400px;">
+    <div class="modal-header">
+      <h2>Konfirmasi Hapus</h2>
+      <button class="modal-close" onclick="tutupModal('modal-hapus')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" style="text-align:center; padding: 28px 20px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:12px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p id="pesan-hapus" style="font-size:14px; color: var(--text-primary);">Apakah kamu yakin ingin menghapus akun ini?</p>
+      <p style="color: var(--text-muted); font-size:12px; margin-top:6px;">Aksi ini tidak dapat dibatalkan.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="tutupModal('modal-hapus')">Batal</button>
+      <button class="btn btn-danger" id="btn-konfirmasi-hapus" onclick="konfirmasiHapus()">Ya, Hapus</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MODAL: TAMBAH/EDIT PROXY ==================== -->
+<div class="modal-overlay" id="modal-proxy">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modal-proxy-judul">Tambah Proxy</h2>
+      <button class="modal-close" onclick="tutupModal('modal-proxy')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="form-proxy-id">
+      
+      <div class="form-row">
+        <div class="form-group" style="flex:2;">
+          <label class="form-label">Host / IP <span class="required">*</span></label>
+          <input type="text" class="form-control" id="form-proxy-host" placeholder="Contoh: 192.168.1.100 atau proxy.server.com">
+        </div>
+        <div class="form-group" style="flex:1;">
+          <label class="form-label">Port <span class="required">*</span></label>
+          <input type="number" class="form-control" id="form-proxy-port" placeholder="8080">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Protokol</label>
+        <select class="form-control select-field" id="form-proxy-protokol">
+          <option value="http">HTTP</option>
+          <option value="https">HTTPS</option>
+          <option value="socks5">SOCKS5</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Username (Opsional)</label>
+          <input type="text" class="form-control" id="form-proxy-user" placeholder="Proxy username">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password (Opsional)</label>
+          <input type="password" class="form-control" id="form-proxy-pass" placeholder="Proxy password">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Catatan</label>
+        <input type="text" class="form-control" id="form-proxy-catatan" placeholder="Contoh: US Residential, Mobile IP, dll">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="tutupModal('modal-proxy')">Batal</button>
+      <button class="btn btn-primary" onclick="simpanProxy()">Simpan Proxy</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MODAL: IMPORT PROXY BULK ==================== -->
+<div class="modal-overlay" id="modal-import-proxy">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Import Proxy Massal</h2>
+      <button class="modal-close" onclick="tutupModal('modal-import-proxy')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Daftar Proxy (satu per baris)</label>
+        <textarea class="form-control" id="import-proxy-text" rows="7" placeholder="192.168.1.1:8080&#10;192.168.1.2:8080:username:password&#10;user:pass@192.168.1.3:8080&#10;socks5://192.168.1.4:1080"></textarea>
+      </div>
+      <div class="import-format">
+        <p>Format yang didukung:</p>
+        <pre>host:port
+host:port:username:password
+user:password@host:port
+http://host:port atau socks5://host:port</pre>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="tutupModal('modal-import-proxy')">Batal</button>
+      <button class="btn btn-primary" onclick="importProxyBulk()">Import ke Pool</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MODAL: PILIH PROXY POOL ==================== -->
+<div class="modal-overlay" id="modal-pilih-proxy">
+  <div class="modal" style="max-width: 480px;">
+    <div class="modal-header">
+      <h2>Pilih Proxy dari Pool</h2>
+      <button class="modal-close" onclick="tutupModal('modal-pilih-proxy')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+      <div id="list-pilihan-proxy" style="display:flex; flex-direction:column; gap:8px;"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="tutupModal('modal-pilih-proxy')">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MODAL: KELOLA LOGIN & SESI AKUN ==================== -->
+<div class="modal-overlay" id="modal-session">
+  <div class="modal" style="max-width: 560px;">
+    <div class="modal-header">
+      <div>
+        <h2 id="modal-session-title">Kelola Login & Sesi Akun</h2>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:2px;" id="modal-session-subtitle">@username • Platform</div>
+      </div>
+      <button class="modal-close" onclick="tutupModal('modal-session')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- Session Navigation Sub-tabs -->
+      <div style="display:flex; gap:8px; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <button class="btn btn-secondary btn-sm session-subtab active" id="btn-subtab-autologin" onclick="gantiSubtabSession('autologin')">
+          Auto-Login (Headless)
+        </button>
+        <button class="btn btn-secondary btn-sm session-subtab" id="btn-subtab-interactive" onclick="gantiSubtabSession('interactive')">
+          Browser Visual (Manual)
+        </button>
+        <button class="btn btn-secondary btn-sm session-subtab" id="btn-subtab-cookies" onclick="gantiSubtabSession('cookies')">
+          Cookies JSON
+        </button>
+      </div>
+
+      <!-- Tab 1: Auto-Login Headless -->
+      <div id="session-pane-autologin">
+        <div style="background:var(--bg-muted); border:1px solid var(--border); border-radius:var(--radius); padding:12px 14px; margin-bottom:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <span style="font-size:12px; font-weight:600; color:var(--text-secondary);">Status Sesi Saat Ini:</span>
+            <span id="session-cur-badge" class="badge badge-neutral"><span class="badge-dot"></span>Belum Login</span>
+          </div>
+          <div style="font-size:12px; color:var(--text-muted);" id="session-proxy-info">Proxy: Default / Direct</div>
+        </div>
+
+        <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin-bottom:16px;">
+          Bot akan membuka browser stealth di latar belakang, mengisi kredensial secara otomatis, dan mengambil cookies sesi otentikasi.
+        </p>
+
+        <div id="session-login-progress" style="display:none; margin-bottom:16px;">
+          <div style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--accent-light); border:1px solid rgba(37,99,235,0.2); border-radius:var(--radius);">
+            <div class="spinner-sm" style="width:16px; height:16px; border:2px solid var(--accent); border-top-color:transparent; border-radius:50%; animation:spin 0.8s linear infinite;"></div>
+            <span style="font-size:13px; color:var(--accent); font-weight:500;" id="session-progress-text">Menjalankan auto-login...</span>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-primary" id="btn-run-autologin" onclick="jalankanAutoLoginUI()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            Mulai Auto-Login
+          </button>
+          <button class="btn btn-secondary" id="btn-verify-single" onclick="verifikasiSesiAkunUI()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            Verifikasi Sesi
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab 2: Browser Visual (Manual) -->
+      <div id="session-pane-interactive" style="display:none;">
+        <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin-bottom:14px;">
+          Buka jendela browser Chrome langsung di layar komputer Anda untuk menyelesaikan login manual, captcha puzzle, atau kode SMS/OTP.
+        </p>
+
+        <div style="background:var(--bg-muted); border:1px solid var(--border); border-radius:var(--radius); padding:12px; margin-bottom:16px;">
+          <div style="font-size:12px; font-weight:600; margin-bottom:4px;">Langkah-langkah:</div>
+          <ol style="font-size:12px; color:var(--text-secondary); padding-left:18px; margin:0; line-height:1.6;">
+            <li>Klik tombol <strong>"Buka Browser Login"</strong> di bawah.</li>
+            <li>Di jendela Chrome yang muncul, login akun Anda dan selesaikan verifikasi/captcha.</li>
+            <li>Setelah masuk ke halaman beranda, kembali ke sini dan klik <strong>"Simpan Sesi Dari Browser"</strong>.</li>
+          </ol>
+        </div>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-primary" id="btn-open-browser" onclick="bukaBrowserLoginManualUI()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Buka Browser Login
+          </button>
+          <button class="btn btn-success" id="btn-save-browser-session" onclick="simpanSesiDariBrowserUI()" style="background:var(--success); color:#fff;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Simpan Sesi Dari Browser
+          </button>
+          <button class="btn btn-secondary" onclick="tutupBrowserManualUI()">
+            Tutup Browser
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab 3: Cookies JSON -->
+      <div id="session-pane-cookies" style="display:none;">
+        <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin-bottom:12px;">
+          Paste cookies (format JSON dari ekstensi browser seperti EditThisCookie atau Cookie-Editor) untuk langsung login tanpa kredensial.
+        </p>
+
+        <div class="form-group">
+          <label class="form-label">Data Cookies (JSON Array)</label>
+          <textarea class="form-control" id="session-cookies-input" rows="7" placeholder='[{"name": "sessionid", "value": "xyz...", "domain": ".tiktok.com"}]'></textarea>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-primary" onclick="simpanCookiesJSONUI()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Import Cookies
+            </button>
+            <button class="btn btn-secondary" onclick="exportCookiesJSONUI()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Cookies
+            </button>
+          </div>
+          <button class="btn btn-ghost" style="color:var(--danger);" onclick="hapusSesiAkunUI()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Reset Sesi
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="tutupModal('modal-session')">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TOAST CONTAINER ==================== -->
+<div class="toast-container" id="toast-container"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

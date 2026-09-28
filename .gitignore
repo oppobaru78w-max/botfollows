@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Local Database & Sessions
+data/*.db
+data/sessions/*
+!data/.gitkeep
+!data/sessions/.gitkeep
+
+# Environment & Config
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db
